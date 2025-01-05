@@ -9,4 +9,5 @@ FetchContent_MakeAvailable(SFML)
 
 add_executable(game main.cpp)
 
-target_link_libraries(game PRIVATE SFML::Graphics)
+target_link_libraries(game PRIVATE SFML::Graphics shared)
+target_include_directories(game PRIVATE ${CMAKE_SOURCE_DIR}/shared)
