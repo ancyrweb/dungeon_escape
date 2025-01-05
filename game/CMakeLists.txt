@@ -1,13 +1,11 @@
-include(FetchContent)
-FetchContent_Declare(SFML
-        GIT_REPOSITORY https://github.com/SFML/SFML.git
-        GIT_TAG 3.0.0
-        GIT_SHALLOW ON
-        EXCLUDE_FROM_ALL
-        SYSTEM)
-FetchContent_MakeAvailable(SFML)
-
-add_executable(game main.cpp)
+add_executable(game main.cpp
+        Animation.cpp
+        Animation.hpp
+        Animator.cpp
+        Animator.hpp
+        Player.cpp
+        Player.hpp
+        GameObject.hpp)
 
 target_link_libraries(game PRIVATE SFML::Graphics shared)
 target_include_directories(game PRIVATE ${CMAKE_SOURCE_DIR}/shared)
