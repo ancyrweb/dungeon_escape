@@ -6,7 +6,7 @@
 
 class Animator {
 public:
-  Animator(const std::map<std::string, Animation>&, float fps);
+  Animator(std::map<std::string, Animation>, float fps);
 
   void setAnimation(std::string name);
   std::string getAnimation() const;
@@ -14,8 +14,7 @@ public:
   sf::IntRect getFrame() const;
 
 private:
-  const std::map<std::string, Animation> &_animations;
-
+  std::map<std::string, Animation> _animations;
   std::string _currentAnimation;
   float _fps;
   float _accumulator;

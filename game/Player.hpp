@@ -10,7 +10,7 @@
 
 class Player : public GameObject {
 public:
-  explicit Player(const std::map<std::string, Animation>& animations);
+  explicit Player(std::map<std::string, Animation> animations);
 
   void initialize();
   void input(const sf::Event& event) override;
@@ -18,7 +18,6 @@ public:
   void draw(sf::RenderWindow& window) const override;
 
 private:
-  std::map<std::string, Animation> _animations;
   Animator _animator;
   sf::Texture _texture;
   sf::Sprite _sprite;

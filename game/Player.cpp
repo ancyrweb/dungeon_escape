@@ -2,8 +2,7 @@
 
 #include "GameConfig.hpp"
 
-Player::Player(const std::map<std::string, Animation>& animations) :
-  _animations(animations),
+Player::Player(std::map<std::string, Animation> animations) :
   _animator(animations, 60.0f),
   _texture("../../assets/characters/player.png"),
   _sprite(_texture)

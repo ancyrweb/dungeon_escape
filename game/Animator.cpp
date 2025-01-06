@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Animator::Animator(const std::map<std::string, Animation>& animations, float fps)
+Animator::Animator(std::map<std::string, Animation> animations, float fps)
   : _currentAnimation(animations.begin()->first),
   _animations(animations),
   _fps(fps),
