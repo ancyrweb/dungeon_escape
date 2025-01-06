@@ -12,6 +12,10 @@ Animator::Animator(std::map<std::string, Animation> animations, float fps)
 }
 
 void Animator::setAnimation(std::string name) {
+  if (_currentAnimation == name) {
+    return;
+  }
+
   _currentAnimation = name;
   _accumulator = 0;
   _frame = 0;

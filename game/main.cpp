@@ -29,11 +29,8 @@ int main() {
         { "walkingRight", {{ 0, 910 }, { 120, 130 }, 9 }}
   };
 
-  Player player(map);
-
-
-  std::vector<GameObject*> gameObjects;
-  gameObjects.push_back(&player);
+  std::vector<std::unique_ptr<GameObject>> gameObjects;
+  gameObjects.push_back(std::make_unique<Player>(map));
 
   sf::Clock clock;
 
