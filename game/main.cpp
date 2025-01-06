@@ -18,7 +18,7 @@ int main() {
   window.setKeyRepeatEnabled(false);
   window.setFramerateLimit(60);
 
-  auto map = new std::map<std::string, Animation>{
+  auto map = std::map<std::string, Animation>{
         { "idleDown", {{ 0, 0 }, { 120, 130 }, 1 }},
         { "idleLeft", {{ 0, 130 }, { 120, 130 }, 1 }},
         { "idleUp", {{ 0, 260 }, { 120, 130 }, 1 }},
@@ -29,7 +29,7 @@ int main() {
         { "walkingRight", {{ 0, 910 }, { 120, 130 }, 9 }}
   };
 
-  Player player = Player(*map);
+  Player player = Player(map);
 
   sf::Clock clock;
 
