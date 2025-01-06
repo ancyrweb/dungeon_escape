@@ -29,7 +29,11 @@ int main() {
         { "walkingRight", {{ 0, 910 }, { 120, 130 }, 9 }}
   };
 
-  Player player = Player(map);
+  Player player(map);
+
+
+  std::vector<GameObject*> gameObjects;
+  gameObjects.push_back(&player);
 
   sf::Clock clock;
 
@@ -45,13 +49,21 @@ int main() {
         }
       }
 
-      player.input(event.value());
+      for (auto& go : gameObjects) {
+        go->input(event.value());
+      }
     }
 
-    player.update(dt);
+    for (auto& go : gameObjects) {
+      go->update(dt);
+    }
+
     window.clear(sf::Color::White);
 
-    player.draw(window);
+    for (const auto& go : gameObjects) {
+      go->draw(window);
+    }
+
     window.display();
   }
 
