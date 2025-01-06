@@ -6,13 +6,15 @@
 
 #include "Animation.hpp"
 #include "Animator.hpp"
-#include "GameObject.hpp"
+#include "Character.hpp"
 
-class Player : public GameObject {
+class Player : public Character {
 public:
   explicit Player(std::map<std::string, Animation> animations);
 
   void initialize();
+
+  // Game Object methods
   void input(const sf::Event& event) override;
   void update(const sf::Time& dt) override;
   void draw(sf::RenderWindow& window) const override;

@@ -8,6 +8,10 @@ class GameConfig {
   public:
     static int getTileSize();
     static sf::Vector2i getMapSize();
+
+    static constexpr int TILE_SIZE = 40;
+    static constexpr int MAP_WIDTH = 20;
+    static constexpr int MAP_HEIGHT = 20;
 };
 
 #endif //GAMECONFIG_HPP

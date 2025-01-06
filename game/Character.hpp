@@ -3,9 +3,9 @@
 
 #include <SFML/Graphics.hpp>
 
-class GameObject {
+class Character {
 public:
-  virtual ~GameObject() = default;
+  virtual ~Character() = default;
 
   virtual void input(const sf::Event &event) {}
   virtual void update(const sf::Time& dt) = 0;

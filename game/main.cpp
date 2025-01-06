@@ -5,6 +5,7 @@
 #include "Animation.hpp"
 #include "GameConfig.hpp"
 #include "Player.hpp"
+#include "TerrainBlock.hpp"
 
 int main() {
   auto mapSize = GameConfig::getMapSize();
@@ -29,8 +30,11 @@ int main() {
         { "walkingRight", {{ 0, 910 }, { 120, 130 }, 9 }}
   };
 
-  std::vector<std::unique_ptr<GameObject>> gameObjects;
+  std::vector<std::unique_ptr<Character>> gameObjects;
   gameObjects.push_back(std::make_unique<Player>(map));
+
+  std::array<std::array<std::unique_ptr<TerrainBlock>, GameConfig::MAP_WIDTH>, GameConfig::MAP_HEIGHT> terrainBlocks;
+  terrainBlocks[5][5] = std::make_unique<TerrainBlock>(true, sf::Vector2i(5, 5));
 
   sf::Clock clock;
 
@@ -56,6 +60,14 @@ int main() {
     }
 
     window.clear(sf::Color::White);
+
+    for (const auto& row : terrainBlocks) {
+      for (const auto& block : row) {
+        if (block != nullptr) {
+          block->draw(window);
+        }
+      }
+    }
 
     for (const auto& go : gameObjects) {
       go->draw(window);

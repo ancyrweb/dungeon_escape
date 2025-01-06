@@ -1,9 +1,9 @@
 #include "GameConfig.hpp"
 
 int GameConfig::getTileSize() {
-  return 40;
+  return TILE_SIZE;
 }
 
 sf::Vector2i GameConfig::getMapSize() {
-  return { 20, 20 };
+  return { MAP_WIDTH, MAP_HEIGHT };
 }
