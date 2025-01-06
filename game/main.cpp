@@ -4,9 +4,11 @@
 
 #include "Animation.hpp"
 #include "AnimationKeys.hpp"
+#include "Collider.hpp"
 #include "GameConfig.hpp"
 #include "Player.hpp"
 #include "TerrainBlock.hpp"
+#include "WorldContext.hpp"
 
 int main() {
   auto mapSize = GameConfig::getMapSize();
@@ -31,11 +33,12 @@ int main() {
         { AnimationKeys::WALKING_RIGHT, {{ 0, 910 }, { 120, 130 }, 9 }}
   };
 
-  std::vector<std::unique_ptr<Character>> gameObjects;
-  gameObjects.push_back(std::make_unique<Player>(map));
+  std::vector<std::unique_ptr<Character>> characters;
+  characters.push_back(std::make_unique<Player>(map));
 
-  std::array<std::array<std::unique_ptr<TerrainBlock>, GameConfig::MAP_WIDTH>, GameConfig::MAP_HEIGHT> terrainBlocks;
-  terrainBlocks[5][5] = std::make_unique<TerrainBlock>(true, sf::Vector2i(5, 5));
+  TerrainMap terrainMap;
+  WorldContext worldContext(characters, terrainMap);
+  Collider collider;
 
   sf::Clock clock;
 
@@ -51,28 +54,16 @@ int main() {
         }
       }
 
-      for (auto& go : gameObjects) {
-        go->input(event.value());
-      }
+      for (auto& c : characters) c->input(event.value());
     }
 
-    for (auto& go : gameObjects) {
-      go->update(dt);
-    }
+    for (auto& c : characters) c->update(dt);
+    collider.check(worldContext, dt);
 
     window.clear(sf::Color::White);
 
-    for (const auto& row : terrainBlocks) {
-      for (const auto& block : row) {
-        if (block != nullptr) {
-          block->draw(window);
-        }
-      }
-    }
-
-    for (const auto& go : gameObjects) {
-      go->draw(window);
-    }
+    terrainMap.draw(window);
+    for (const auto& c : characters) c->draw(window);
 
     window.display();
   }

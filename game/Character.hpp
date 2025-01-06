@@ -14,6 +14,12 @@ public:
   virtual void update(const sf::Time& dt);
   virtual void draw(sf::RenderWindow& window) const;
 
+  sf::Vector2f getPosition() const { return _sprite.getPosition(); }
+  sf::Vector2i getCoordinates() const;
+
+protected:
+  void setTarget(sf::Vector2i position);
+  void updateTarget(const sf::Time& dt);
 
 protected:
   Animator _animator;
@@ -25,9 +31,6 @@ protected:
 
   sf::Vector2i _velocityVector;
   float _velocityFactor;
-
-  void setTarget(sf::Vector2i position);
-  void updateTarget(const sf::Time& dt);
 };
 
 #endif //GAMEOBJECT_HPP

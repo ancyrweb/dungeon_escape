@@ -1,10 +1,19 @@
 #include "Player.hpp"
+
+#include <iostream>
+
 #include "GameConfig.hpp"
 
 Player::Player(std::map<std::string, Animation> animations) :
   Character(animations)
 {
   _isSettingTarget = false;
+  _currentTile.setSize({
+    static_cast<float>(GameConfig::getTileSize()),
+    static_cast<float>(GameConfig::getTileSize())
+  });
+  _currentTile.setFillColor(sf::Color(255, 0, 0, 100));
+  alignCurrentTile();
 }
 
 void Player::input(const sf::Event &event) {
@@ -28,4 +37,23 @@ void Player::input(const sf::Event &event) {
   }
 }
 
+void Player::update(const sf::Time &dt) {
+  Character::update(dt);
+  alignCurrentTile();
+}
 
+void Player::draw(sf::RenderWindow &window) const {
+  window.draw(_currentTile);
+  Character::draw(window);
+}
+
+void Player::alignCurrentTile() {
+  auto coordinates = getCoordinates();
+
+  sf::Vector2f position = {
+    static_cast<float>(coordinates.x * GameConfig::getTileSize()),
+    static_cast<float>(coordinates.y * GameConfig::getTileSize())
+  };
+
+  _currentTile.setPosition(position);
+}

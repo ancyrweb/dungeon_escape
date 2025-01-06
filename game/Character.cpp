@@ -38,6 +38,16 @@ void Character::draw(sf::RenderWindow &window) const {
   window.draw(_sprite);
 }
 
+sf::Vector2i Character::getCoordinates() const {
+  auto position = _sprite.getPosition();
+  auto size = _sprite.getGlobalBounds().size;
+
+  int x = static_cast<int>(position.x + size.x / 2);
+  int y = static_cast<int>(position.y + size.y / 2);
+
+  return { x / GameConfig::getTileSize(), y / GameConfig::getTileSize() };
+}
+
 void Character::setTarget(sf::Vector2i position) {
   auto bounds = _sprite.getGlobalBounds();
   _targetPosition.x = position.x - bounds.size.x / 2;
