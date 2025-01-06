@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Animation.hpp"
+#include "AnimationKeys.hpp"
 #include "GameConfig.hpp"
 #include "Player.hpp"
 #include "TerrainBlock.hpp"
@@ -20,14 +21,14 @@ int main() {
   window.setFramerateLimit(60);
 
   auto map = std::map<std::string, Animation>{
-        { "idleDown", {{ 0, 0 }, { 120, 130 }, 1 }},
-        { "idleLeft", {{ 0, 130 }, { 120, 130 }, 1 }},
-        { "idleUp", {{ 0, 260 }, { 120, 130 }, 1 }},
-        { "idleRight", {{ 0, 390 }, { 120, 130 }, 1 }},
-        { "walkingDown", {{ 0, 520 }, { 120, 130 }, 9 }},
-        { "walkingLeft", {{ 0, 650 }, { 120, 130 }, 9 }},
-        { "walkingUp", {{ 0, 780 }, { 120, 130 }, 9 }},
-        { "walkingRight", {{ 0, 910 }, { 120, 130 }, 9 }}
+        { AnimationKeys::IDLE_DOWN, {{ 0, 0 }, { 120, 130 }, 1 }},
+        { AnimationKeys::IDLE_LEFT, {{ 0, 130 }, { 120, 130 }, 1 }},
+        { AnimationKeys::IDLE_UP, {{ 0, 260 }, { 120, 130 }, 1 }},
+        { AnimationKeys::IDLE_RIGHT, {{ 0, 390 }, { 120, 130 }, 1 }},
+        { AnimationKeys::WALKING_DOWN, {{ 0, 520 }, { 120, 130 }, 9 }},
+        { AnimationKeys::WALKING_LEFT, {{ 0, 650 }, { 120, 130 }, 9 }},
+        { AnimationKeys::WALKING_UP, {{ 0, 780 }, { 120, 130 }, 9 }},
+        { AnimationKeys::WALKING_RIGHT, {{ 0, 910 }, { 120, 130 }, 9 }}
   };
 
   std::vector<std::unique_ptr<Character>> gameObjects;

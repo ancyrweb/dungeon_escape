@@ -3,13 +3,31 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Animator.hpp"
+
 class Character {
 public:
+  Character(std::map<std::string, Animation> animations);
   virtual ~Character() = default;
 
   virtual void input(const sf::Event &event) {}
-  virtual void update(const sf::Time& dt) = 0;
-  virtual void draw(sf::RenderWindow& window) const = 0;
+  virtual void update(const sf::Time& dt);
+  virtual void draw(sf::RenderWindow& window) const;
+
+
+protected:
+  Animator _animator;
+  sf::Texture _texture;
+  sf::Sprite _sprite;
+
+  sf::Vector2f _targetPosition;
+  bool _reachedTarget;
+
+  sf::Vector2i _velocityVector;
+  float _velocityFactor;
+
+  void setTarget(sf::Vector2i position);
+  void updateTarget(const sf::Time& dt);
 };
 
 #endif //GAMEOBJECT_HPP

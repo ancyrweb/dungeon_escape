@@ -7,7 +7,9 @@ add_executable(game main.cpp
         Player.hpp
         Character.hpp
         TerrainBlock.cpp
-        TerrainBlock.hpp)
+        TerrainBlock.hpp
+        Character.cpp
+        AnimationKeys.hpp)
 
 target_link_libraries(game PRIVATE SFML::Graphics shared)
 target_include_directories(game PRIVATE ${CMAKE_SOURCE_DIR}/shared)
