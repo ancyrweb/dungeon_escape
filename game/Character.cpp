@@ -48,12 +48,21 @@ sf::Vector2i Character::getCoordinates() const {
   return { x / GameConfig::getTileSize(), y / GameConfig::getTileSize() };
 }
 
-void Character::setTarget(sf::Vector2i position) {
+void Character::setTarget(sf::Vector2i position, const TerrainMap &terrainMap) {
   auto bounds = _sprite.getGlobalBounds();
-  _targetPosition.x = position.x - bounds.size.x / 2;
-  _targetPosition.y = position.y - bounds.size.y / 2;
+  sf::Vector2f targetPosition(position.x - bounds.size.x / 2, position.y - bounds.size.y / 2);
+  auto closest = closestAvailablePosition(targetPosition);
+
+  _targetPosition.x = closest.x;
+  _targetPosition.y = closest.y;
   _reachedTarget = false;
 }
+
+sf::Vector2f Character::closestAvailablePosition(const sf::Vector2f &target) const {
+  sf::Vector2f closest = target;
+  return closest;
+}
+
 
 void Character::updateTarget(const sf::Time& dt) {
   constexpr float TARGET_AREA_EPSILON = 5.0f;

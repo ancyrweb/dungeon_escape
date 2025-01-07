@@ -4,11 +4,9 @@
 
 #include "Animation.hpp"
 #include "AnimationKeys.hpp"
-#include "Collider.hpp"
 #include "GameConfig.hpp"
 #include "Player.hpp"
 #include "TerrainBlock.hpp"
-#include "WorldContext.hpp"
 
 int main() {
   auto mapSize = GameConfig::getMapSize();
@@ -37,8 +35,6 @@ int main() {
   characters.push_back(std::make_unique<Player>(map));
 
   TerrainMap terrainMap;
-  WorldContext worldContext(characters, terrainMap);
-  Collider collider;
 
   sf::Clock clock;
 
@@ -54,11 +50,10 @@ int main() {
         }
       }
 
-      for (auto& c : characters) c->input(event.value());
+      for (auto& c : characters) c->input(event.value(), terrainMap);
     }
 
     for (auto& c : characters) c->update(dt);
-    collider.check(worldContext, dt);
 
     window.clear(sf::Color::White);
 

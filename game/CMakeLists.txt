@@ -10,10 +10,6 @@ add_executable(game main.cpp
         TerrainBlock.hpp
         Character.cpp
         AnimationKeys.hpp
-        Collider.cpp
-        Collider.hpp
-        WorldContext.cpp
-        WorldContext.hpp
         TerrainMap.cpp
         TerrainMap.hpp
 )

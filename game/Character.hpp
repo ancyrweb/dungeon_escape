@@ -4,13 +4,14 @@
 #include <SFML/Graphics.hpp>
 
 #include "Animator.hpp"
+#include "TerrainMap.hpp"
 
 class Character {
 public:
   Character(std::map<std::string, Animation> animations);
   virtual ~Character() = default;
 
-  virtual void input(const sf::Event &event) {}
+  virtual void input(const sf::Event &event, const TerrainMap &terrainMap) {}
   virtual void update(const sf::Time& dt);
   virtual void draw(sf::RenderWindow& window) const;
 
@@ -18,7 +19,8 @@ public:
   sf::Vector2i getCoordinates() const;
 
 protected:
-  void setTarget(sf::Vector2i position);
+  sf::Vector2f closestAvailablePosition(const sf::Vector2f &target) const;
+  void setTarget(sf::Vector2i position, const TerrainMap &terrainMap);
   void updateTarget(const sf::Time& dt);
 
 protected:

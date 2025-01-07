@@ -16,11 +16,11 @@ Player::Player(std::map<std::string, Animation> animations) :
   alignCurrentTile();
 }
 
-void Player::input(const sf::Event &event) {
+void Player::input(const sf::Event &event, const TerrainMap &terrainMap) {
   if (const auto* mouseButtonPressed = event.getIf<sf::Event::MouseButtonPressed>()) {
     if (mouseButtonPressed->button == sf::Mouse::Button::Right) {
       _isSettingTarget = true;
-      setTarget(mouseButtonPressed->position);
+      setTarget(mouseButtonPressed->position, terrainMap);
     }
   }
 
@@ -32,7 +32,7 @@ void Player::input(const sf::Event &event) {
 
   if (_isSettingTarget) {
     if (const auto* mouseMoved = event.getIf<sf::Event::MouseMoved>()) {
-      setTarget(mouseMoved->position);
+      setTarget(mouseMoved->position, terrainMap);
     }
   }
 }
