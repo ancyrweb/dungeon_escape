@@ -7,6 +7,10 @@ TerrainBlock::TerrainBlock() : _isSolid(false), _coordinates({ 0, 0 }) {
   synchronize();
 }
 
+TerrainBlock::TerrainBlock(const TerrainBlock &other): _isSolid(other._isSolid), _coordinates(other._coordinates) {
+  synchronize();
+}
+
 TerrainBlock::TerrainBlock(bool isSolid, sf::Vector2i coordinates) : _isSolid(isSolid), _coordinates(coordinates) {
   synchronize();
 }

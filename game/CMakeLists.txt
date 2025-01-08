@@ -12,6 +12,8 @@ add_executable(game main.cpp
         AnimationKeys.hpp
         TerrainMap.cpp
         TerrainMap.hpp
+        PathFinder.cpp
+        PathFinder.hpp
 )
 
 target_link_libraries(game PRIVATE SFML::Graphics shared)

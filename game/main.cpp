@@ -5,6 +5,7 @@
 #include "Animation.hpp"
 #include "AnimationKeys.hpp"
 #include "GameConfig.hpp"
+#include "PathFinder.hpp"
 #include "Player.hpp"
 #include "TerrainBlock.hpp"
 
@@ -20,7 +21,10 @@ int main() {
   window.setKeyRepeatEnabled(false);
   window.setFramerateLimit(60);
 
-  auto map = std::map<std::string, Animation>{
+  TerrainMap terrainMap;
+  PathFinder pathFinder(terrainMap);
+
+  auto userAnimations = std::map<std::string, Animation>{
         { AnimationKeys::IDLE_DOWN, {{ 0, 0 }, { 120, 130 }, 1 }},
         { AnimationKeys::IDLE_LEFT, {{ 0, 130 }, { 120, 130 }, 1 }},
         { AnimationKeys::IDLE_UP, {{ 0, 260 }, { 120, 130 }, 1 }},
@@ -32,9 +36,8 @@ int main() {
   };
 
   std::vector<std::unique_ptr<Character>> characters;
-  characters.push_back(std::make_unique<Player>(map));
+  characters.push_back(std::make_unique<Player>(userAnimations, pathFinder));
 
-  TerrainMap terrainMap;
 
   sf::Clock clock;
 
@@ -50,7 +53,7 @@ int main() {
         }
       }
 
-      for (auto& c : characters) c->input(event.value(), terrainMap);
+      for (auto& c : characters) c->input(event.value());
     }
 
     for (auto& c : characters) c->update(dt);

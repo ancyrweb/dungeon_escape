@@ -7,7 +7,10 @@
 class TerrainBlock {
 public:
   TerrainBlock();
+  TerrainBlock(const TerrainBlock &other);
   TerrainBlock(bool isSolid, sf::Vector2i coordinates);
+
+  bool isSolid() { return _isSolid; }
 
   void init(bool isSolid, sf::Vector2i coordinates);
   void draw(sf::RenderWindow& window) const;

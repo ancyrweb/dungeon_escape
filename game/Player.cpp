@@ -4,8 +4,8 @@
 
 #include "GameConfig.hpp"
 
-Player::Player(std::map<std::string, Animation> animations) :
-  Character(animations)
+Player::Player(std::map<std::string, Animation> animations, const PathFinder &pathFinder) :
+  Character(animations, pathFinder)
 {
   _isSettingTarget = false;
   _currentTile.setSize({
@@ -16,11 +16,11 @@ Player::Player(std::map<std::string, Animation> animations) :
   alignCurrentTile();
 }
 
-void Player::input(const sf::Event &event, const TerrainMap &terrainMap) {
+void Player::input(const sf::Event &event) {
   if (const auto* mouseButtonPressed = event.getIf<sf::Event::MouseButtonPressed>()) {
     if (mouseButtonPressed->button == sf::Mouse::Button::Right) {
       _isSettingTarget = true;
-      setTarget(mouseButtonPressed->position, terrainMap);
+      setTarget(mouseButtonPressed->position);
     }
   }
 
@@ -32,7 +32,7 @@ void Player::input(const sf::Event &event, const TerrainMap &terrainMap) {
 
   if (_isSettingTarget) {
     if (const auto* mouseMoved = event.getIf<sf::Event::MouseMoved>()) {
-      setTarget(mouseMoved->position, terrainMap);
+      setTarget(mouseMoved->position);
     }
   }
 }

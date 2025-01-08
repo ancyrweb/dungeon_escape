@@ -9,6 +9,7 @@ class TerrainMap {
 public:
   TerrainMap();
   TerrainMapArray &getMap() { return _map; }
+  bool isSolid(sf::Vector2i coordinates) const;
   void draw(sf::RenderWindow &window) const;
 private:
   TerrainMapArray _map;
